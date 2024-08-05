@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>myMemoPad</title>
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+</head>
+<header>
+<h1>配列:Todo</h1>
+</header>
+
+
+
+todo <input type="text" id="title">
+<button id="add">add</button>
+<div id="view"></div>
+<table id="list"></table>
+
+<script>
+    const titles = [];
+// 追加イベント（addをクリックしたら配列に追加）
+$("#add").on("click",function(){
+    $("#view").empty();
+    const t = $("#title").val();
+    titles.push(t);
+    for(let i=0; i<titles.length; i++){
+        $("#view").prepend('<div class="delete" data-titles="'+i+'">'+titles[i]+'</div>');
+    }
+});
+
+
+
+
+
+
+// 削除イベント（要素をクリックしたら消えるようにする）
+// $("div").on("click",".delete",function(){
+//     $("#view").empty();
+//     titles.splice( $(this). attr("data-titles") , 1);
+//     for(let i=o; i<titles.length; i++){
+//         $("#view").prepend('<div class="delete" data-titles="'+i+'">'+titles[i]+'</div>');
+//     }
+// });
+
+$("#save").on("click",function(){
+    const key   = $("#key").val();
+    const value = $("#memo").val();
+    localStorage.setItem(key,value);
+    const html = '<tr><td>'+key+'</td><td>'+value+'</td></tr>';
+    $("#list").append(html);
+});
+
+
+</script>
+<footer><small>G's</small></footer>
+</body>
+</html>
